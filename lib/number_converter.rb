@@ -37,16 +37,32 @@ class Numbers
     @input = input
   end
 
-  def converter
+
+
+  def converter_hundreds
     if @input.length == 1
       @@ones.fetch(@input)
     elsif (@input.length == 2) & (@@teens.include?(@input))
       @@teens.fetch(@input)
     elsif (@input.length == 2) & (@input.include?("0"))
       @@tens.fetch(@input)
+    elsif @input.length == 2
+      @@tens.fetch(@input[0]+("0"))+("-")+(@@ones.fetch(@input[1]))
+    elsif (@input.length == 3) & (@input[1] != "0")
+      @@ones.fetch(@input[0])+(" hundred and ")+ @@tens.fetch(@input[1]+("0"))+("-")+(@@ones.fetch(@input[2]))
+    elsif (@input.length == 3) & (@input[1] == "0")
+      @@ones.fetch(@input[0])+(" hundred and ")+(@@ones.fetch(@input[2]))
     else
       return "No Good"
-
     end
-  end
+  end  
+
+    # reverse_array = @input.digits(1000)
+    # count = reverse_array.length
+    # answer = ""
+    # if count == 1
+    #   answer+reverse_array[0].converter_hundreds.to_s
+    # end
+    # return counter
+
 end
